@@ -40,7 +40,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574864743758</updated>
-      <workItem from="1574864745524" duration="3386000" />
+      <workItem from="1574864745524" duration="3729000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1574864796945</created>
@@ -70,7 +70,21 @@
       <option name="project" value="LOCAL" />
       <updated>1574873829969</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Status: Upgrade Controller Work&#10;TO DO: Clean UP">
+      <created>1574873960488</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1574873960488</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Status: Upgrade Controller Work&#10;TO DO: Clean UP">
+      <created>1574874136393</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1574874136393</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -88,6 +102,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/screeps.com/default" />
+    </ignored-roots>
     <MESSAGE value="Test" />
     <MESSAGE value="Status: Upgrade Controller Work&#10;TO DO: Clean UP" />
     <option name="LAST_COMMIT_MESSAGE" value="Status: Upgrade Controller Work&#10;TO DO: Clean UP" />
