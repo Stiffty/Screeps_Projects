@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0d75f6c-2745-4f8b-a654-9c4c54c26c73" name="Default Changelist" comment="Status: Upgrade Controller Work&#10;TO DO: Clean UP">
+      <change afterPath="$PROJECT_DIR$/screeps.com/default/Backup/.idea/Backup.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screeps.com/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/.sync" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/127_0_0_1___21025/default/role.Upgrader.js" beforeDir="false" afterPath="$PROJECT_DIR$/127_0_0_1___21025/default/role.Upgrader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/127_0_0_1___21025/default/structure.Spawner.js" beforeDir="false" afterPath="$PROJECT_DIR$/127_0_0_1___21025/default/structure.Spawner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.Miner.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/role.Miner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.Upgrader.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/role.Upgrader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.transporter.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/role.transporter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/structure.Spawner.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/structure.Spawner.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +50,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574864743758</updated>
-      <workItem from="1574864745524" duration="5003000" />
+      <workItem from="1574864745524" duration="12921000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1574864796945</created>

@@ -9,10 +9,6 @@
 var Upgrader = {
 
     run: function (creep) {
-        // if(!Game.creeps[creep.memory.transporter]){
-        //     creep.memory.transporter = null;
-        // }
-
         if (creep.upgradeController(creep.room.controller)=== ERR_NOT_IN_RANGE||creep.store[RESOURCE_ENERGY] === creep.store.getCapacity()) {
             //console.log(creep.upgradeController(creep.room.controller));
             let target = creep.room.controller;
