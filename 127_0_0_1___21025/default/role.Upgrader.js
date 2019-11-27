@@ -27,7 +27,9 @@ var Upgrader = {
                 //}
                 //creep.say(creep.room.controller.pos);
             }
-        } else {
+        } else if(Game.creeps[creep.memory.transporter] === undefined){
+            creep.memory.transporter = null;
+        }else{
             let target = creep.room.controller;
             console.log(creep.upgradeController(target));
             if (creep.upgradeController(target) === ERR_NOT_IN_RANGE) {

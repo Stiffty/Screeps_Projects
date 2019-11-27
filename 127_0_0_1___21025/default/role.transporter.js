@@ -18,10 +18,11 @@ var Transporter = {
                 creep.say(' Mine...');
             }
         } else {
-            let base = creep.room.find(FIND_MY_SPAWNS);
+            
 
             let Ucreeps = _.filter(Game.creeps, (creep) => creep.memory.role === 'Upgrader');
-            if (creep.memory.client === null&& Ucreeps.length == 3) {
+            if (creep.memory.client === null&& Ucreeps.length == 6) { //Lenth muss Upgrade spanlimit sein
+                
                 for (const name in Ucreeps) {
 
                     let UcreepMEM = Ucreeps[name].memory.transporter;
@@ -36,14 +37,21 @@ var Transporter = {
                 }
                 
             } else if (creep.memory.client !== null) {
-
+                
+                if(Game.creeps[creep.memory.client] === undefined){
+                    creep.memory.client = null;
+                }
+                
                 if (creep.transfer(Game.creeps[creep.memory.client], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     //Game.creeps[creep.memory.client].store.getFreeCapacity(RESOURCE_ENERGY)>0&&
+                   
                     creep.moveTo(Game.creeps[creep.memory.client].pos);
                 }
 
             }
-            if (creep.transfer(base[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE&&Game.spawns['Spawn1'].store[RESOURCE_ENERGY] <200) {
+            let base = creep.room.find(FIND_MY_SPAWNS);
+            if (creep.transfer(base[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE&&Game.spawns['Spawn1'].store[RESOURCE_ENERGY] <300) {
+                
                 creep.moveTo(base[0]);
             }
         }

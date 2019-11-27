@@ -4,20 +4,16 @@ var spawner = require('structure.Spawner');
 var upgrader = require('role.Upgrader');
 
 module.exports.loop = function () {
-
-    for(var name in Memory.creeps) {
-        if(!Game.creeps[name]) {
-            delete Memory.creeps[name];
-            console.log('Clearing non-existing creep memory:', name);
-        }
-    }
-
+    
+console.log('LUL');
+    
     spawner.run();
-
+    
     for (const name in Game.creeps) {
 
         var creep = Game.creeps[name];
-
+        console.log(creep.memory.role);
+        
         if (creep.memory.role === 'Miner') {
             miner.run(creep);
         }
@@ -27,5 +23,16 @@ module.exports.loop = function () {
         if (creep.memory.role === 'Upgrader') {
             upgrader.run(creep);
         }
+        
+        for(var i in Memory.creeps) {
+    if(!Game.creeps[i]) {
+        delete Memory.creeps[i];
     }
+}
+    }
+
+    
+
+ 
+    
 };

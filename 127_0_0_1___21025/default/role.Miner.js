@@ -13,8 +13,9 @@ var Miner = {
         if (creep.memory.source === null||creep.harvest(Game.getObjectById(creep.memory.source)) === ERR_NOT_IN_RANGE) {
             console.log('Test');
             let sources = creep.room.find(FIND_SOURCES_ACTIVE);
+            //creep.moveByPath(Source,{ignoreCreeps: true});
             creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#03ff0a'}});
-            if (creep.harvest(sources[0]) !== ERR_NOT_IN_RANGE) {
+            if (creep.harvest(sources[0]) !== ERR_NOT_IN_RANGE&&sources[0]!== undefined) {
                 creep.memory.source = sources[0].id;
             }
 
