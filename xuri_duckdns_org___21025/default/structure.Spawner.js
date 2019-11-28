@@ -10,13 +10,22 @@
 var Spawner = {
     run: function (Spawnlimit_Miner, Spawnlimit_Upgrader) {
 
-        if (_(Game.creeps).filter({memory: {role: 'Miner'}}).value().length < Spawnlimit_Miner) {
+        let Miner = _(Game.creeps).filter({memory: {role: 'Miner'}}).value().length;
+        let Transporter = _(Game.creeps).filter({memory: {role: 'Transporter'}}).value().length;
+
+        //console.log(Game.spawns['Spawn1'].room.find(FIND_CONSTRUCTION_SITES));
+        if(_(Game.creeps).filter({memory: {role: 'Builder'}}).value().length<5){
+            Game.spawns['Spawn1'].createCreep([WORK, MOVE, CARRY],{role: 'Builder'});
+        }
+
+        if (Miner < Spawnlimit_Miner&&Miner<= Transporter) {
             Game.spawns['Spawn1'].createCreep([WORK, MOVE, WORK], {
                 role: 'Miner',
-                source: null
+                source: null,
+                deathtimer: 50
             });
 
-        } else if (_(Game.creeps).filter({memory: {role: 'Transporter'}}).value().length < Spawnlimit_Upgrader) {
+        } else if (Transporter < Spawnlimit_Upgrader) {
             Game.spawns['Spawn1'].createCreep([MOVE, MOVE, CARRY], {role: 'Transporter', client: null});
         } else if (_(Game.creeps).filter({memory: {role: 'Upgrader'}}).value().length < Spawnlimit_Upgrader) {
             Game.spawns['Spawn1'].createCreep([WORK, MOVE, CARRY], undefined, {

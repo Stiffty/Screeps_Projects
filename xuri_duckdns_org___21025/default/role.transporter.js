@@ -11,15 +11,15 @@ var Transporter = {
     run: function (creep,ClientAnzahl) {
 
         let source = creep.room.find(FIND_DROPPED_RESOURCES);
-        if (creep.pickup(source[0]) === ERR_NOT_IN_RANGE||creep.store.getUsedCapacity() === 0) {
-            console.log(creep.store.getUsedCapacity());
+        if (creep.pickup(source[0]) === ERR_NOT_IN_RANGE&&creep.store.getUsedCapacity() === 0) {
+
             creep.moveTo(source[0]), ({visualizePathStyle: {stroke: '#0010ff'}});
         } else {
-            
+
 
             let Ucreeps = _.filter(Game.creeps, (creep) => creep.memory.role === 'Upgrader');
             if (creep.memory.client === null&& Ucreeps.length === ClientAnzahl) { //Lenth muss Upgrade spanlimit sein
-                
+
                 for (const name in Ucreeps) {
                     let UcreepMEM = Ucreeps[name].memory.transporter;
                     if (UcreepMEM === null) {
@@ -28,7 +28,7 @@ var Transporter = {
                         break;
                     }
                 }
-                
+
             } else if (creep.memory.client) {
                 let client = Game.creeps[creep.memory.client];
                 if(client === undefined){
@@ -43,6 +43,7 @@ var Transporter = {
 
                 creep.moveTo(base[0]);
             }
+
         }
     }
 
