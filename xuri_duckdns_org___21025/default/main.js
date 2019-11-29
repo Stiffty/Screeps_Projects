@@ -9,8 +9,8 @@ module.exports.loop = function () {
 
     console.log(_(Game.creeps).filter({memory: {role: 'Transporter'}}).value().length);
     console.log(_(Game.creeps).filter({memory: {role: 'Upgrader'}}).value().length);
-    let MinerAnzahl = 0;
-    let UpgraderAnzahl = 0;
+    let MinerAnzahl = 3;
+    let UpgraderAnzahl = 2;
 
     spawner.run(MinerAnzahl,UpgraderAnzahl);
 
@@ -25,8 +25,6 @@ module.exports.loop = function () {
         // for(const i in t){
         //     t[i].remove();
         // }
-
-
 
         if (creep.memory.role === 'Miner') {
 
@@ -48,10 +46,12 @@ module.exports.loop = function () {
             Architect.run(Game.creeps['Hans']);
             Game.spawns['Spawn1'].memory.builder = false;
         }
-        for (var i in Memory.creeps) {
-            if (!Game.creeps[i]) {
-                delete Memory.creeps[i];
-            }
+
+
+    }
+    for (var i in Memory.creeps) {
+        if (!Game.creeps[i]) {
+            delete Memory.creeps[i];
         }
     }
 

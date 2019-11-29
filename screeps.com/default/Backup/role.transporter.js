@@ -8,52 +8,42 @@
  */
 var Transporter = {
 
-    run: function (creep) {
+    run: function (creep,ClientAnzahl) {
 
-        if (creep.store.getFreeCapacity() > 0) {
-            let sources = creep.room.find(FIND_DROPPED_RESOURCES);
-            creep.say(' Suche...');
-            if (creep.pickup(sources[0]) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#0010ff'}});
-                creep.say(' Mine...');
-            }
+        let source = creep.room.find(FIND_DROPPED_RESOURCES);
+        if (creep.pickup(source[0]) === ERR_NOT_IN_RANGE&&creep.store.getUsedCapacity() === 0) {
+
+            creep.moveTo(source[0]), ({visualizePathStyle: {stroke: '#0010ff'}});
         } else {
-            
+
 
             let Ucreeps = _.filter(Game.creeps, (creep) => creep.memory.role === 'Upgrader');
-            if (creep.memory.client === null&& Ucreeps.length == 6) { //Lenth muss Upgrade spanlimit sein
-                
+            if (creep.memory.client === null&& Ucreeps.length === ClientAnzahl) { //Lenth muss Upgrade spanlimit sein
+
                 for (const name in Ucreeps) {
-
                     let UcreepMEM = Ucreeps[name].memory.transporter;
-
-                    if (UcreepMEM === null && creep.memory.client == null) {
-                        console.log(creep.name + ' Find ' + Ucreeps.name);
+                    if (UcreepMEM === null) {
                         Ucreeps[name].memory.transporter = creep.name;
                         creep.memory.client = Ucreeps[name].name;
-                        console.log(UcreepMEM);
                         break;
                     }
                 }
-                
-            } else if (creep.memory.client !== null) {
-                
-                if(Game.creeps[creep.memory.client] === undefined){
+
+            } else if (creep.memory.client) {
+                let client = Game.creeps[creep.memory.client];
+                if(client === undefined){
                     creep.memory.client = null;
-                }
-                
-                if (creep.transfer(Game.creeps[creep.memory.client], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    //Game.creeps[creep.memory.client].store.getFreeCapacity(RESOURCE_ENERGY)>0&&
-                   
-                    creep.moveTo(Game.creeps[creep.memory.client].pos);
+                }else if (creep.transfer(client, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(client.pos);
                 }
 
             }
             let base = creep.room.find(FIND_MY_SPAWNS);
-            if (creep.transfer(base[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE&&Game.spawns['Spawn1'].store[RESOURCE_ENERGY] <300) {
-                
+            if (Game.spawns['Spawn1'].store[RESOURCE_ENERGY] <300&&creep.transfer(base[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+
                 creep.moveTo(base[0]);
             }
+
         }
     }
 

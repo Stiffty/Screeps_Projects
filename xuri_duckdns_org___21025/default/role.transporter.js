@@ -8,43 +8,70 @@
  */
 var Transporter = {
 
+
+
+
     run: function (creep,ClientAnzahl) {
 
-        let source = creep.room.find(FIND_DROPPED_RESOURCES);
-        if (creep.pickup(source[0]) === ERR_NOT_IN_RANGE&&creep.store.getUsedCapacity() === 0) {
+        let search = function (target) {
+            let source = creep.room.findClosestByPath(target);
+            creep.memory.target = creep.room.findPath(creep.pos, source[0].pos);
+            creep.move(creep.memory.target[0].x,creep.memory.target[0].y)
+        };
 
-            creep.moveTo(source[0]), ({visualizePathStyle: {stroke: '#0010ff'}});
-        } else {
+        switch (creep.memory.action) {
 
-
-            let Ucreeps = _.filter(Game.creeps, (creep) => creep.memory.role === 'Upgrader');
-            if (creep.memory.client === null&& Ucreeps.length === ClientAnzahl) { //Lenth muss Upgrade spanlimit sein
-
-                for (const name in Ucreeps) {
-                    let UcreepMEM = Ucreeps[name].memory.transporter;
-                    if (UcreepMEM === null) {
-                        Ucreeps[name].memory.transporter = creep.name;
-                        creep.memory.client = Ucreeps[name].name;
-                        break;
-                    }
-                }
-
-            } else if (creep.memory.client) {
+            case 1:
+                let source = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
+                creep.memory.way = creep.room.findPath(creep.pos, source.pos);
+                creep.memory.target = source.id;
+                creep.moveTo(creep.memory.way[0].x,creep.memory.way[0].y);
+                creep.memory.action = 4;
+                break
+            case 2:
+                let spawn = creep.room.find(FIND_MY_SPAWNS);
+                creep.memory.way = creep.room.findPath(creep.pos, spawn[0].pos);
+                creep.memory.target = spawn.id;
+                creep.moveTo(creep.memory.way[0].x,creep.memory.way[0].y);
+                creep.memory.action = 5;
+                break
+            case 3:
                 let client = Game.creeps[creep.memory.client];
-                if(client === undefined){
-                    creep.memory.client = null;
-                }else if (creep.transfer(client, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(client.pos);
+                creep.memory.way = creep.room.findPath(creep.pos, client.pos);
+
+                break
+            case 4:
+                creep.moveByPath(creep.memory.way);
+                console.log(creep.memory.target);
+                if(creep.pickup(Game.getObjectById(creep.memory.target))  === OK){
+                    creep.memory.action = 7;
                 }
+                break
+            case 5:
+                creep.moveByPath(creep.memory.way);
+                if(creep.transfer(Game.getObjectById(creep.memory.target),RESOURCE_ENERGY) === OK){
+                    creep.memory.action = 8;
+                }
+                break
+            case 6:
+                creep.moveByPath(creep.memory.way);
+                if(creep.transfer(Game.creeps[creep.memory.client],RESOURCE_ENERGY) === OK){
 
+                }
+                break
+            case 7:
+                if(creep.harvest(creep.memory.target) !== OK&&creep.store.getUsedCapacity() !== creep.store.getCapacity()){
+                 creep.memory.action = 1;
+                }else if(creep.store.getUsedCapacity() === creep.store.getCapacity()){
+                    creep.memory.action = 2;
             }
-            let base = creep.room.find(FIND_MY_SPAWNS);
-            if (Game.spawns['Spawn1'].store[RESOURCE_ENERGY] <300&&creep.transfer(base[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-
-                creep.moveTo(base[0]);
-            }
-
+                break
+            case 8:
+                creep.transfer(creep.memory.target,RESOURCE_ENERGY);
+                creep.memory.action = 1;
+                break
         }
+
     }
 
 };

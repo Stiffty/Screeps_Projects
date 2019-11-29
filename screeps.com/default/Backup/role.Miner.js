@@ -10,28 +10,21 @@ var Miner = {
 
     run: function (creep) {
 
-        if (creep.memory.source === null||creep.harvest(Game.getObjectById(creep.memory.source)) === ERR_NOT_IN_RANGE) {
-            console.log('Test');
-            let sources = creep.room.find(FIND_SOURCES_ACTIVE);
-            //creep.moveByPath(Source,{ignoreCreeps: true});
-            creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#03ff0a'}});
-            if (creep.harvest(sources[0]) !== ERR_NOT_IN_RANGE&&sources[0]!== undefined) {
+        if (creep.memory.source === null || creep.harvest(Game.getObjectById(creep.memory.source)) === (ERR_NOT_IN_RANGE || ERR_NOT_ENOUGH_RESOURCES)) {
+
+            let sources = creep.room.find(FIND_SOURCES);
+            creep.memory.deathtimer--;
+            if (creep.moveTo(Game.getObjectById(creep.memory.source),{visualizePathStyle: {stroke: '#03ff0a'}}) !== OK&&creep.memory.source === null) {
+               // creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#03ff0a'}});
                 creep.memory.source = sources[0].id;
             }
-
-        } else {
-            console.log('Test');
-            let source = Game.getObjectById(creep.memory.source);
-            console.log(source);
-            if(creep.harvest(source) === ERR_NOT_ENOUGH_RESOURCES){
-                creep.memory.source = null;
+            if(creep.memory.deathtimer === 0){
+                creep.memory.source=sources[0].id;
+                creep.memory.deathtimer = 50;
             }
-           //creep.harvest(source[0]);
         }
 
-    },
-
-
+    }
 };
 
 module.exports = Miner;

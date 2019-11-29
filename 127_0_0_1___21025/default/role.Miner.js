@@ -10,28 +10,37 @@ var Miner = {
 
     run: function (creep) {
 
-        if (creep.memory.source === null||creep.harvest(Game.getObjectById(creep.memory.source)) === ERR_NOT_IN_RANGE) {
-            console.log('Test');
-            let sources = creep.room.find(FIND_SOURCES_ACTIVE);
-            //creep.moveByPath(Source,{ignoreCreeps: true});
-            creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#03ff0a'}});
-            if (creep.harvest(sources[0]) !== ERR_NOT_IN_RANGE&&sources[0]!== undefined) {
-                creep.memory.source = sources[0].id;
-            }
+        switch (creep.memory.action) {
+            case 1:
+                //Recource als Path
+                let source = creep.room.find(FIND_SOURCES);
+                creep.memory.source = creep.room.findPath(creep.pos, source[0].pos);
+                creep.memory.deathtimer = creep.memory.source.length + 10;
+                creep.memory.action = 2;
+                break;
+            case 2:
+                //Path aus dem Speicher Ablaufen
+                creep.moveByPath(creep.memory.source);
+                creep.memory.deathtimer--;
+                if (creep.memory.deathtimer === 0) {
+                    creep.memory.action = 1;
+                }
 
-        } else {
-            console.log('Test');
-            let source = Game.getObjectById(creep.memory.source);
-            console.log(source);
-            if(creep.harvest(source) === ERR_NOT_ENOUGH_RESOURCES){
-                creep.memory.source = null;
-            }
-           //creep.harvest(source[0]);
+                let pos = creep.pos.findClosestByPath(FIND_SOURCES);
+                if (creep.harvest(pos) === OK) {
+                    creep.memory.action = 3;
+                }
+                break;
+            case 3:
+                //Minen
+                let pos1 = creep.pos.findClosestByPath(FIND_SOURCES);
+                creep.harvest(pos1);
+                break;
+            default:
+                creep.memory.action = 1;
+                break;
         }
-
-    },
-
-
+    }
 };
 
 module.exports = Miner;

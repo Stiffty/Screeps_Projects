@@ -8,42 +8,31 @@
  */
 
 var Spawner = {
-    run: function () {
-        var Spawnlimit_Miner = 3;
-        var Spawnlimit_Upgrader = 6;
+    run: function (Spawnlimit_Miner, Spawnlimit_Upgrader) {
 
+        let Miner = _(Game.creeps).filter({memory: {role: 'Miner'}}).value().length;
+        let Transporter = _(Game.creeps).filter({memory: {role: 'Transporter'}}).value().length;
 
-        if (_(Game.creeps).filter({ memory: {role: 'Miner' }}).value().length < (Spawnlimit_Miner)) {
+        //console.log(Game.spawns['Spawn1'].room.find(FIND_CONSTRUCTION_SITES));
+        if(_(Game.creeps).filter({memory: {role: 'Builder'}}).value().length<5){
+            Game.spawns['Spawn1'].createCreep([WORK, MOVE, CARRY],{role: 'Builder'});
+        }
 
-            var typ = Game.spawns['Spawn1'].memory.typ;
-            console.log(typ);
-            if (typ === 1) {
-               if( Game.spawns['Spawn1'].createCreep([WORK, MOVE, WORK], {
-                   
-                    role: 'Miner',
-                    source: null
-                })!== ERR_NOT_ENOUGH_ENERGY){
-                   typ = 2;
-                   Game.spawns['Spawn1'].memory.typ = typ;
-               }
-                return;
-            } else if (typ === 2) {
-                if(Game.spawns['Spawn1'].createCreep([MOVE, MOVE, CARRY],{role: 'Transporter',client: null})!== ERR_NOT_ENOUGH_ENERGY){
-                    typ = 1;
-                    Game.spawns['Spawn1'].memory.typ = typ;
-                }
-               
+        if (Miner < Spawnlimit_Miner&&Miner<= Transporter) {
+            Game.spawns['Spawn1'].createCreep([WORK, MOVE, WORK], {
+                role: 'Miner',
+                source: null,
+                deathtimer: 50
+            });
 
-            }
-
-        }else if (_(Game.creeps).filter({ memory: { role: 'Upgrader' }}).value().length < Spawnlimit_Upgrader) {
+        } else if (Transporter < Spawnlimit_Upgrader) {
+            Game.spawns['Spawn1'].createCreep([MOVE, MOVE, CARRY], {role: 'Transporter', client: null});
+        } else if (_(Game.creeps).filter({memory: {role: 'Upgrader'}}).value().length < Spawnlimit_Upgrader) {
             Game.spawns['Spawn1'].createCreep([WORK, MOVE, CARRY], undefined, {
                 role: 'Upgrader',
                 transporter: null
             });
-            if(_(Game.creeps).filter({ memory: { role: 'Transporter' }}).value().length < Spawnlimit_Upgrader){
-                Game.spawns['Spawn1'].createCreep([MOVE, MOVE, CARRY],{role: 'Transporter',client: null});
-            }
+
         }
     }
 
