@@ -14,7 +14,11 @@ var Upgrader = {
 
             let target = creep.room.controller;
             creep.moveTo(target);
-        }else if(Game.creeps[creep.memory.transporter] === undefined){
+            if(creep.upgradeController(creep.room.controller)=== OK){
+                return;
+            }
+        }
+        if(Game.creeps[creep.memory.transporter] === undefined){
             creep.memory.transporter = null;
         }
     }

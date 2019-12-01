@@ -38,7 +38,7 @@ var Builder = {
                     break
                 case 3:
                     //Moveto Rec
-
+                    console.log(creep.moveTo(Game.getObjectById(creep.memory.target)));
                     if (creep.moveTo(Game.getObjectById(creep.memory.target)) === ERR_INVALID_TARGET) {
                         creep.memory.action = 1;
                     }
@@ -98,7 +98,7 @@ var Builder = {
                     break
                 case 8:
                     creep.repair(Game.getObjectById(creep.memory.target));
-                    if (Game.getObjectById(creep.memory.target).hits === Game.getObjectById(creep.memory.target).hitsMax || creep.store.getUsedCapacity() === 0) {
+                    if (Game.getObjectById(creep.memory.target).hits === Game.getObjectById(creep.memory.target).hitsMax && creep.store.getUsedCapacity() === 0) {
                         creep.memory.action = 1;
                     } else if (Game.getObjectById(creep.memory.target).hits === Game.getObjectById(creep.memory.target).hitsMax && creep.store.getUsedCapacity() !== 0) {
                         let struct = creep.room.find(FIND_STRUCTURES);

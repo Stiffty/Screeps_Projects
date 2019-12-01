@@ -9,14 +9,17 @@
 var Upgrader = {
 
     run: function (creep) {
-        // if(!Game.creeps[creep.memory.transporter]){
-        //     creep.memory.transporter = null;
-        // }
 
-        if (creep.upgradeController(creep.room.controller)=== ERR_NOT_IN_RANGE||creep.store[RESOURCE_ENERGY] === creep.store.getCapacity()) {
-            //console.log(creep.upgradeController(creep.room.controller));
+        if (creep.upgradeController(creep.room.controller)=== (ERR_NOT_ENOUGH_RESOURCES)) {
+
             let target = creep.room.controller;
             creep.moveTo(target);
+            if(creep.upgradeController(creep.room.controller)=== OK){
+                return;
+            }
+        }
+        if(Game.creeps[creep.memory.transporter] === undefined){
+            creep.memory.transporter = null;
         }
     }
 };

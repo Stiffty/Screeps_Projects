@@ -2,29 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0d75f6c-2745-4f8b-a654-9c4c54c26c73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/screeps.com/default/Backup/role.Architect.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screeps.com/default/Backup/role.Builder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/.vs/VSWorkspaceState.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/.vs/default/v15/.suo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/.vs/slnx.sqlite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screeps.com/default/role.Architect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screeps.com/default/role.Builder.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Architect1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Builder1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.transporter1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/structure.Spawner1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/127_0_0_1___21025/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/127_0_0_1___21025/.sync" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/127_0_0_1___21025/default/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/127_0_0_1___21025/default/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/127_0_0_1___21025/default/role.Miner.js" beforeDir="false" afterPath="$PROJECT_DIR$/127_0_0_1___21025/default/role.Miner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/127_0_0_1___21025/default/role.Upgrader.js" beforeDir="false" afterPath="$PROJECT_DIR$/127_0_0_1___21025/default/role.Upgrader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/127_0_0_1___21025/default/role.transporter.js" beforeDir="false" afterPath="$PROJECT_DIR$/127_0_0_1___21025/default/role.transporter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/127_0_0_1___21025/default/structure.Spawner.js" beforeDir="false" afterPath="$PROJECT_DIR$/127_0_0_1___21025/default/structure.Spawner.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screeps.com/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/.sync" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screeps.com/default/Backup/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/Backup/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/Backup/role.Architect.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/Backup/role.Architect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/Backup/role.Builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/Backup/role.Builder.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screeps.com/default/Backup/role.Miner.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/Backup/role.Miner.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screeps.com/default/Backup/role.Upgrader.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/Backup/role.Upgrader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screeps.com/default/Backup/role.transporter.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/Backup/role.transporter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screeps.com/default/Backup/structure.Spawner.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/Backup/structure.Spawner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.Miner.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/role.Miner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.Upgrader.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/role.Upgrader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.transporter.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/role.transporter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/structure.Spawner.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/structure.Spawner.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/.sync" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Architect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Builder.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Miner.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Miner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.transporter.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.transporter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/structure.Spawner.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/structure.Spawner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Upgrader.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Upgrader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.transporter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/structure.Spawner.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +76,8 @@
       <workItem from="1574954491487" duration="19378000" />
       <workItem from="1575028585964" duration="518000" />
       <workItem from="1575029250670" duration="11741000" />
-      <workItem from="1575062310258" duration="5597000" />
+      <workItem from="1575062310258" duration="5932000" />
+      <workItem from="1575110649553" duration="45121000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1574864796945</created>
@@ -136,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574973658597</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Status: Transporter new &#10;TO DO: Architect Scrpit, Builder">
+      <created>1575068107646</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1575068107646</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,6 +177,7 @@
     <MESSAGE value="Status: Upgrade Controller Work&#10;TO DO: Clean UP" />
     <MESSAGE value="Status: Clean UP&#10;TO DO: Builder" />
     <MESSAGE value="Status: Aritect and Builder addet&#10;TO DO: Max performance and Fix Moveto" />
-    <option name="LAST_COMMIT_MESSAGE" value="Status: Aritect and Builder addet&#10;TO DO: Max performance and Fix Moveto" />
+    <MESSAGE value="Status: Transporter new &#10;TO DO: Architect Scrpit, Builder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Status: Transporter new &#10;TO DO: Architect Scrpit, Builder" />
   </component>
 </project>

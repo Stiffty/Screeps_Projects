@@ -7,12 +7,23 @@ var Builder = require('role.Builder');
 
 module.exports.loop = function () {
 
-    console.log(_(Game.creeps).filter({memory: {role: 'Transporter'}}).value().length);
-    console.log(_(Game.creeps).filter({memory: {role: 'Upgrader'}}).value().length);
-    let MinerAnzahl = 0;
-    let UpgraderAnzahl = 0;
 
-    spawner.run(MinerAnzahl,UpgraderAnzahl);
+    let MinerAnzahl = 6;
+    let UpgraderAnzahl = 3;
+    let Transporteranzahl = 6; //muss > Uprgader#
+    let repair = false;
+
+    let struct = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES);
+
+    for(const i in struct){
+
+        if(struct[i].hits < struct[i].hitsMax){
+           repair = true;
+            break
+        }
+    }
+    console.log(repair);
+    spawner.run(MinerAnzahl,UpgraderAnzahl,Transporteranzahl,repair);
 
 
     for (const name in Game.creeps) {
@@ -26,8 +37,6 @@ module.exports.loop = function () {
         //     t[i].remove();
         // }
 
-
-
         if (creep.memory.role === 'Miner') {
 
             miner.run(creep);
@@ -35,23 +44,34 @@ module.exports.loop = function () {
         if (creep.memory.role === 'Transporter') {
 
             transporter.run(creep,UpgraderAnzahl);
+
         }
         if (creep.memory.role === 'Upgrader') {
 
             upgrader.run(creep);
         }
         if(creep.memory.role === 'Builder'){
-            Builder.run(creep);
+
+            if(Game.spawns['Spawn1'].room.find(FIND_CONSTRUCTION_SITES).length === 0&& repair === false){
+                creep.moveTo(Game.spawns['Spawn1']);
+                Game.spawns['Spawn1'].recycleCreep(creep);
+            }else{
+
+                Builder.run(creep,repair);
+            }
+
         }
         if(Game.spawns['Spawn1'].memory.builder === true){
             Game.spawns['Spawn1'].createCreep([MOVE],'Hans', {optPath: null,role: 'Architect'});
             Architect.run(Game.creeps['Hans']);
             Game.spawns['Spawn1'].memory.builder = false;
         }
-        for (var i in Memory.creeps) {
-            if (!Game.creeps[i]) {
-                delete Memory.creeps[i];
-            }
+
+
+    }
+    for (var i in Memory.creeps) {
+        if (!Game.creeps[i]) {
+            delete Memory.creeps[i];
         }
     }
 

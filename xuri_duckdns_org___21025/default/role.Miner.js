@@ -10,36 +10,32 @@ var Miner = {
 
     run: function (creep) {
 
-        switch (creep.memory.action) {
-            case 1:
-                //Recource als Path
-                let source = creep.room.find(FIND_SOURCES);
-                creep.memory.source = creep.room.findPath(creep.pos, source[0].pos);
-                creep.memory.deathtimer = creep.memory.source.length + 10;
-                creep.memory.action = 2;
-                break;
-            case 2:
-                //Path aus dem Speicher Ablaufen
-                creep.moveByPath(creep.memory.source);
-                creep.memory.deathtimer--;
-                if (creep.memory.deathtimer === 0) {
-                    creep.memory.action = 1;
-                }
+        let MoveToResourceUMine = {
+            MoveR: function () {
+                if (creep.memory.source === null) {
+                    let path = creep.pos.findClosestByPath(FIND_SOURCES);
 
-                let pos = creep.pos.findClosestByPath(FIND_SOURCES);
-                if (creep.harvest(pos) === OK) {
-                    creep.memory.action = 3;
+                    if(path == null){
+                        creep.moveTo(creep.room.find(FIND_MY_SPAWNS)[0]);
+                        creep.room.find(FIND_MY_SPAWNS)[0].recycleCreep(creep);
+                    }else{
+                        creep.memory.source = path.id;
+                        creep.memory.deathtimer = creep.room.findPath(creep.pos, Game.getObjectById(creep.memory.source).pos).length + 20;
+                    }
+
+                } else if (creep.harvest(Game.getObjectById(creep.memory.source)) !== OK) {
+                    creep.moveTo(Game.getObjectById(creep.memory.source));
+
+                    if (creep.memory.deathtimer === 0) {
+                        creep.memory.source = null;
+                    }else{
+                        creep.memory.deathtimer--;
+                    }
                 }
-                break;
-            case 3:
-                //Minen
-                let pos1 = creep.pos.findClosestByPath(FIND_SOURCES);
-                creep.harvest(pos1);
-                break;
-            default:
-                creep.memory.action = 1;
-                break;
-        }
+            }
+
+        };
+        MoveToResourceUMine.MoveR();
     }
 };
 
