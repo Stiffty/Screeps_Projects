@@ -53,7 +53,7 @@ var Builder = {
                 if (Game.getObjectById(source) === null) {
                     source = creep.pos.findClosestByPath(FIND_MY_CONSTRUCTION_SITES).id;
                     i--;
-                } else if (checkDistance.check() <= 3) {
+                } else if (checkDistance.check() <= 5) {
                     if (creep.build(Game.getObjectById(source)) !== OK) {
                        return 'Bad';
                     }
@@ -67,11 +67,11 @@ var Builder = {
 
             switch (creep.memory.actionb) {
                 case 1:
-                    MoveToResourceUMine.MoveR();
-                    if (creep.store.getFreeCapacity() === 0) {
+                    if (creep.store.getUsedCapacity() > 0) {
                         source = null;
                         action = 2;
                     }
+                    MoveToResourceUMine.MoveR();
                     break
                 case 2:
                     if (Builden.build() === 'Bad') {

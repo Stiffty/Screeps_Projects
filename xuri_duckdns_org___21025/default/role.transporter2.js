@@ -63,7 +63,7 @@ var Transporter = {
             upgrader: function () {
                 if (source === null) {
                     source = Game.creeps[creep.memory.client].id;
-                } else if (checkDistance.check()<=1) {
+                } else if (checkDistance.check()<=2) {
                     if (Game.getObjectById(source) === null) {
                         creep.memory.client = null;
                     }
