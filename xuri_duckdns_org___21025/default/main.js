@@ -4,15 +4,26 @@ var spawner = require('structure.Spawner1');
 var upgrader = require('role.Upgrader');
 var Architect = require('role.Architect1');
 var Builder = require('role.Builder1');
+var PTest = require('PerformaceTest');
 
 module.exports.loop = function () {
 
+    let spawn = Game.spawns['Spawn1'];
 
     let MinerAnzahl = 0;
     let UpgraderAnzahl = 0;
     let Transporteranzahl = 0; //muss > Uprgader#
 
+    let timeTransporter = 0;
+    let timeSpawn = 0;
+    let timeMiner = 0;
+    let timeUpgrader = 0;
+    let timeBuilder = 0;
+    let time = 0;
+
     let repair = false;
+
+   PTest.run();
     //
     // let struct = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES);
     //
@@ -25,66 +36,80 @@ module.exports.loop = function () {
     // }
     // console.log(repair);
 
+    switch (spawn.room.controller.level) {
 
-    if (Game.spawns['Spawn1'].room.controller.level === 1) {
-        MinerAnzahl = 7;
-        Transporteranzahl = 10;
-        UpgraderAnzahl = 0;
-
-         if(Game.spawns['Spawn1'].memory.builder1 === undefined){
-             Game.spawns['Spawn1'].memory.builder1 = true;
-         }
-        if (Game.spawns['Spawn1'].memory.builder1 === true) {
-            Game.spawns['Spawn1'].createCreep([MOVE], 'Hans', {optPath: null, role: 'Architect'});
-            Architect.run(Game.creeps['Hans']);
-            Game.spawns['Spawn1'].memory.builder1 = false;
-        }
-
-        //Wenn alles gebaut wurde
-        if(Game.spawns['Spawn1'].room.find(FIND_MY_CONSTRUCTION_SITES).length === 0){
-            Transporteranzahl = 4;
-            UpgraderAnzahl = 4;
-        }
-        if(Game.spawns['Spawn1'].spawning === true){
-            let spw = Game.spawns['Spawn1'];
-            spw.room.visual.text(':tools:' + Game.creeps[spw.spawning.name].memory.action, spw.pos.x + 1, spw.pos.y, {align: 'left', opacity: 0.7});
-        }else{
-            spawner.run(MinerAnzahl, UpgraderAnzahl, Transporteranzahl, repair);
-        }
-
-        for (const name in Game.creeps) {
-
-            let creep = Game.creeps[name];
+        case 1:
+            MinerAnzahl = 7;
+            Transporteranzahl = 10;
+            UpgraderAnzahl = 0;
 
 
-            if (creep.memory.role === 'Miner') {
-                miner.run(creep);
+            if (Game.spawns['Spawn1'].memory.builder1 === undefined) {
+                Game.spawns['Spawn1'].memory.builder1 = true;
             }
-            if (creep.memory.role === 'Transporter') {
-                if(creep.ticksToLive<50||(Game.spawns['Spawn1'].renewCreep() === OK&&creep.ticksToLive>1400)){
-                    creep.moveTo(Game.spawns['Spawn1'].pos);
-                }else if (Game.spawns['Spawn1'].store[RESOURCE_ENERGY]=== 300&&creep.room.find(FIND_MY_CONSTRUCTION_SITES).length > 0 && UpgraderAnzahl === 0) {
-                    Builder.run(creep, repair);
+            if (Game.spawns['Spawn1'].memory.builder1 === true) {
+                Game.spawns['Spawn1'].createCreep([MOVE], 'Hans', {optPath: null, role: 'Architect'});
+                Architect.run(Game.creeps['Hans']);
+                Game.spawns['Spawn1'].memory.builder1 = false;
+            }
 
-                } else {
-                    transporter.run(creep, UpgraderAnzahl);
+            //Wenn alles gebaut wurde
+            if (Game.spawns['Spawn1'].room.find(FIND_MY_CONSTRUCTION_SITES).length === 0) {
+                Transporteranzahl = 4;
+                UpgraderAnzahl = 4;
+            }
+            if (Game.spawns['Spawn1'].spawning === true) {
+                let spw = Game.spawns['Spawn1'];
+                spw.room.visual.text(':tools:' + Game.creeps[spw.spawning.name].memory.action, spw.pos.x + 1, spw.pos.y, {
+                    align: 'left',
+                    opacity: 0.7
+                });
+            } else {
+                time = spawner.run(MinerAnzahl, UpgraderAnzahl, Transporteranzahl, spawn);
+                if (time > timeSpawn) {
+                    timeSpawn = time;
                 }
-
             }
-            if (creep.memory.role === 'Upgrader') {
 
-                upgrader.run(creep);
+            for (const name in Game.creeps) {
+
+                let creep = Game.creeps[name];
+
+
+                if (creep.memory.role === 'Miner') {
+                    time = miner.run(creep);
+                    if (time > timeMiner) {
+                        timeMiner = time;
+                    }
+                }
+                if (creep.memory.role === 'Transporter') {
+                    if (creep.ticksToLive < 50 || (Game.spawns['Spawn1'].renewCreep() === OK && creep.ticksToLive > 1400)) {
+                        creep.moveTo(Game.spawns['Spawn1'].pos);
+                    } else if (Game.spawns['Spawn1'].store[RESOURCE_ENERGY] === 300 && creep.room.find(FIND_MY_CONSTRUCTION_SITES).length > 0 && UpgraderAnzahl === 0) {
+                        time = Builder.run(creep, repair);
+                        if (time > timeBuilder) {
+                            timeBuilder = time;
+                        }
+
+                    } else {
+                        time = transporter.run(creep, UpgraderAnzahl);
+                        if (time > timeTransporter) {
+                            timeTransporter = time;
+                        }
+                    }
+
+                }
+                if (creep.memory.role === 'Upgrader') {
+                    time = upgrader.run(creep);
+                    if (time > timeUpgrader) {
+                        timeUpgrader = time;
+                    }
+                }
             }
-        }
-    } else if (Game.spawns['Spawn1'].room.controller.level === 2) {
-
-    } else if (Game.spawns['Spawn1'].room.controller.level === 3) {
-
-    } else if (Game.spawns['Spawn1'].room.controller.level === 4) {
-
-    } else if (Game.spawns['Spawn1'].room.controller.level === 5) {
-
+            break
     }
+
+
     //     for (const name in Game.creeps) {
     //
     //     var creep = Game.creeps[name];
@@ -131,4 +156,5 @@ module.exports.loop = function () {
             delete Memory.creeps[i];
         }
     }
+    console.log('Miner: ' + timeMiner.toFixed(3) + ' Spawn: ' + timeSpawn.toFixed(3) + ' Builder: ' + timeBuilder.toFixed(3) + ' Transporter: ' + timeTransporter.toFixed(3) + ' Upgrader: ' + timeUpgrader.toFixed(3) + " All in All " + Game.cpu.getUsed() + " ms");
 };

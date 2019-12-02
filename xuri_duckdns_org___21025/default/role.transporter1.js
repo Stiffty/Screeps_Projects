@@ -11,40 +11,68 @@ var Transporter = {
 
     run: function (creep, ClientAnzahl) {
 
-        if(creep.memory.actionb !==1){
-            creep.memory.actionb =1;
+        let time = Game.cpu.getUsed();
+        let action = creep.memory.action;
+        let source = creep.memory.source;
+
+        if (creep.memory.actionb !== 1) {
+            creep.memory.actionb = 1;
+        }
+
+        let checkDistance = {
+            check: function () {
+                let cx = creep.pos.x;
+                let cy = creep.pos.y;
+
+
+                let sx = Game.getObjectById(source).pos.x;
+                let sy = Game.getObjectById(source).pos.y;
+
+                return Math.abs(cx-sx)+Math.abs(cy-sy);
+            }
         }
 
         let MoveToResourceUMine = {
             MoveR: function () {
-                if (creep.memory.source === null) {
-                    creep.memory.source = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES).id;
-                } else if (creep.pickup(Game.getObjectById(creep.memory.source)) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(Game.getObjectById(creep.memory.source));
-                } else if (creep.pickup(Game.getObjectById(creep.memory.source)) === ERR_INVALID_TARGET) {
-                    creep.memory.source = null;
+                if (Game.getObjectById(source) === null) {
+                    source = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES).id;
+                } else if (checkDistance.check()<=2) {//creep.pickup(Game.getObjectById(source)) === ERR_NOT_IN_RANGE
+                    if (creep.pickup(Game.getObjectById(source)) === ERR_INVALID_TARGET) {
+                        source = null;
+                    }
+                } else{
+                    creep.moveTo(Game.getObjectById(source));
                 }
-
             }
         };
         let SpawnFuellen = {
 
             fuellen: function () {
-                if (creep.memory.source === null) {
-                    creep.memory.source = creep.pos.findClosestByPath(FIND_MY_SPAWNS).id;
-                } else if (creep.transfer(Game.getObjectById(creep.memory.source),RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(Game.getObjectById(creep.memory.source));
+                if (source === null) {
+                    source = creep.pos.findClosestByPath(FIND_MY_SPAWNS).id;
+                } else if (checkDistance.check()<=2) {
+                    creep.transfer(Game.getObjectById(source), RESOURCE_ENERGY);
+                }else{
+                    console.log(checkDistance.check());
+                    creep.moveTo(Game.getObjectById(source));
                 }
             }
         };
 
         let Upgrader = {
             upgrader: function () {
-                if (creep.memory.source === null) {
-                    creep.memory.source = Game.creeps[creep.memory.client].id;
-                } else if (creep.transfer(Game.getObjectById(creep.memory.source),RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(Game.getObjectById(creep.memory.source));
-                 }
+                if (source === null) {
+                    source = Game.creeps[creep.memory.client].id;
+                } else if (checkDistance.check()<=2) {
+                    if (Game.getObjectById(source) === null) {
+                        creep.memory.client = null;
+                    }
+                    creep.transfer(Game.getObjectById(source), RESOURCE_ENERGY);
+                }else{
+                    creep.moveTo(Game.getObjectById(source));
+                }
+
+
             }
         }
 
@@ -56,62 +84,87 @@ var Transporter = {
                     creep.memory.client = null
                 }
                 for (const i in creeps) {
-                    if (creeps[i].memory.transporter === null && creep.memory.client === null) {
+                    if (creep.memory.client === null && creeps[i].memory.transporter === null) {
                         Game.creeps[creeps[i].name].memory.transporter = creep.name;
 
                         creep.memory.client = Game.creeps[creeps[i].name].name;
+                        break
                     }
                 }
             }
         };
 
-        switch (creep.memory.action) {
-            case 1:
-                //Resource sammeln bis voll
-                MoveToResourceUMine.MoveR();
-                if(creep.store.getFreeCapacity() === 0&&creep.room.find(FIND_MY_SPAWNS)[0].store[RESOURCE_ENERGY]<300){
-                    //SpawnBefüllen
-                    creep.memory.source = null;
-                    creep.memory.action = 2;
-                }else if(creep.store.getFreeCapacity() === 0&&creep.memory.client !== null){
-                    //Upgrader befüllen
-                    creep.memory.source = null;
-                    creep.memory.action = 4;
-                }else if(creep.store.getFreeCapacity() === 0&&creep.memory.client === null){
-                    //Upgrader finden
-                    creep.memory.action = 3;
-                }
-                break
-            case 2:
-                //SpawnBefüllen
-                SpawnFuellen.fuellen();
-
-                if(Game.getObjectById(creep.memory.source).store[RESOURCE_ENERGY] === 300||creep.store.getUsedCapacity() === 0){
-                    creep.memory.source = null;
-                    creep.memory.action = 1;
-                }
-                break
-            case 3:
-                //UpgraderFinden
-                UpgraderFinden.Find();
-                creep.memory.action = 1;
-                break
-            case 4:
-                //Upgrader befüllen
-                Upgrader.upgrader();
-
-                if(Game.getObjectById(creep.memory.source) === null){
-                    creep.memory.client = null;
-                }
-
-                if(creep.store.getUsedCapacity() === 0||creep.memory.client === null){
-                    creep.memory.source = null;
-                    creep.memory.action = 1;
-                }
-                break
+        if (creep.store.getFreeCapacity() > 0) {
+            if (action !== 1) {
+                source = null;
+                action = 1;
+            }
+            MoveToResourceUMine.MoveR();
+        } else if (creep.room.find(FIND_MY_SPAWNS)[0].store[RESOURCE_ENERGY] < 300) {
+            if (action !== 2) {
+                source = null;
+                action = 2;
+            }
+            SpawnFuellen.fuellen();
+        } else if (creep.memory.client !== null) {
+            if (action !== 3) {
+                source = null;
+                action = 3;
+            }
+            Upgrader.upgrader();
+        } else if (creep.memory.client === null) {
+            UpgraderFinden.Find();
         }
+        creep.memory.action = action;
+        creep.memory.source = source;
 
+        // switch (creep.memory.action) {
+        //     case 1:
+        //         //Resource sammeln bis voll
+        //         MoveToResourceUMine.MoveR();
+        //         if(creep.store.getFreeCapacity() === 0&&creep.room.find(FIND_MY_SPAWNS)[0].store[RESOURCE_ENERGY]<300){
+        //             //SpawnBefüllen
+        //             creep.memory.source = null;
+        //             creep.memory.action = 2;
+        //         }else if(creep.store.getFreeCapacity() === 0&&creep.memory.client !== null){
+        //             //Upgrader befüllen
+        //             creep.memory.source = null;
+        //             creep.memory.action = 4;
+        //         }else if(creep.store.getFreeCapacity() === 0&&creep.memory.client === null){
+        //             //Upgrader finden
+        //             creep.memory.action = 3;
+        //         }
+        //         break
+        //     case 2:
+        //         //SpawnBefüllen
+        //         SpawnFuellen.fuellen();
+        //
+        //         if(Game.getObjectById(creep.memory.source).store[RESOURCE_ENERGY] === 300||creep.store.getUsedCapacity() === 0){
+        //             creep.memory.source = null;
+        //             creep.memory.action = 1;
+        //         }
+        //         break
+        //     case 3:
+        //         //UpgraderFinden
+        //         UpgraderFinden.Find();
+        //         creep.memory.action = 1;
+        //         break
+        //     case 4:
+        //         //Upgrader befüllen
+        //         Upgrader.upgrader();
+        //
+        //         if(Game.getObjectById(creep.memory.source) === null){
+        //             creep.memory.client = null;
+        //         }
+        //
+        //         if(creep.store.getUsedCapacity() === 0||creep.memory.client === null){
+        //             creep.memory.source = null;
+        //             creep.memory.action = 1;
+        //         }
+        //         break
+        // }
 
+        return (Game.cpu.getUsed() - time);
 
 
         // let rounds = 2;

@@ -10,20 +10,38 @@ var Builder = {
 
     run: function (creep, repair) {
 
+        let time = Game.cpu.getUsed();
+        let action = creep.memory.actionb;
+        let source = creep.memory.source;
+        let i = 0;
 
         if (creep.memory.action !== 1) {
             creep.memory.action = 1;
         }
-        let i = 0;
+
+        let checkDistance = {
+            check: function () {
+                let cx = creep.pos.x;
+                let cy = creep.pos.y;
+
+
+                let sx = Game.getObjectById(source).pos.x;
+                let sy = Game.getObjectById(source).pos.y;
+
+                return Math.abs(cx - sx) + Math.abs(cy - sy);
+            }
+        };
         let MoveToResourceUMine = {
             MoveR: function () {
-                if (creep.memory.source === null) {
-                    creep.memory.source = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES).id;
+                if (Game.getObjectById(source) === null) {
+                    source = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES).id;
                     i--;
-                } else if (creep.pickup(Game.getObjectById(creep.memory.source)) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(Game.getObjectById(creep.memory.source));
-                } else if (creep.pickup(Game.getObjectById(creep.memory.source)) === ERR_INVALID_TARGET) {
-                    creep.memory.source = null;
+                } else if (checkDistance.check() <= 2) {
+                    if (creep.pickup(Game.getObjectById(source)) === ERR_INVALID_TARGET) {
+                        source = null;
+                    }
+                } else {
+                    creep.moveTo(Game.getObjectById(source));
                 }
 
             }
@@ -32,138 +50,58 @@ var Builder = {
         let Builden = {
 
             build: function () {
-                if (creep.memory.source === null) {
-                    creep.memory.source = creep.pos.findClosestByPath(FIND_MY_CONSTRUCTION_SITES).id;
+                if (Game.getObjectById(source) === null) {
+                    source = creep.pos.findClosestByPath(FIND_MY_CONSTRUCTION_SITES).id;
                     i--;
-                } else if (creep.build(Game.getObjectById(creep.memory.source)) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(Game.getObjectById(creep.memory.source));
-                } else if (creep.build(Game.getObjectById(creep.memory.source)) !== OK) {
-                    return 'Bad';
+                } else if (checkDistance.check() <= 5) {
+                    if (creep.build(Game.getObjectById(source)) !== OK) {
+                        source = null;
+                    }
+                } else {
+                    creep.moveTo(Game.getObjectById(source));
                 }
+
+
             }
         };
 
-        for (i ;i<2;i++) {
+        // if(creep.store.getFreeCapacity() > 0&&Game.getObjectById(source).structureType !== null){
+        //    //(creep.store.getFreeCapacity() > 0&&Game.getObjectById(source).structureType === undefined)&&creep.store.getUsedCapacity()<
+        //     if (action !== 1) {
+        //         source = null;
+        //         action = 1;
+        //     }
+        //     MoveToResourceUMine.MoveR();
+        // }else{
+        //     if (action !== 2) {
+        //         source = null;
+        //         action = 2;
+        //     }
+        //     Builden.build();
+        // }
+        creep.memory.actionb = action;
+        creep.memory.source = source;
+
             switch (creep.memory.actionb) {
                 case 1:
                     MoveToResourceUMine.MoveR();
                     if (creep.store.getUsedCapacity() > 0) {
-                        creep.memory.source = null;
-                        creep.memory.actionb = 2;
+                        source = null;
+                        action = 2;
                     }
                     break
                 case 2:
                     if (Builden.build() === 'Bad') {
-                        creep.memory.source = null;
-                        creep.memory.actionb = 1;
+                        source = null;
+                        action = 1;
                     }
                     break
             }
-        }
 
-        // let rounds = 3;
-        // for (let i = 0; i < rounds; i++) {
-        //     switch (creep.memory.action) {
-        //         case 1:
-        //             //Find Rec
-        //
-        //             let source = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
-        //             if (source === null) {
-        //                 source = creep.room.find(FIND_SOURCES)[0];
-        //             }
-        //             creep.memory.way = creep.room.findPath(creep.pos, source.pos);
-        //             creep.memory.target = source.id;
-        //             rounds++;
-        //             creep.memory.action = 3;
-        //             break
-        //         case 2:
-        //             //Find ConstSide
-        //             let ConstSite = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
-        //             if (ConstSite !== null) {
-        //                 creep.memory.way = creep.room.findPath(creep.pos, ConstSite.pos);
-        //                 creep.memory.target = ConstSite.id;
-        //             }
-        //             rounds++;
-        //             creep.memory.action = 4;
-        //             break
-        //         case 3:
-        //             //Moveto Rec
-        //
-        //             if (creep.moveTo(Game.getObjectById(creep.memory.target)) === ERR_INVALID_TARGET) {
-        //                 creep.memory.action = 1;
-        //             }
-        //
-        //             if (creep.pickup(Game.getObjectById(creep.memory.target)) === OK) {
-        //                 creep.memory.action = 5;
-        //             }
-        //             break
-        //         case 4:
-        //             //Move ro Constside
-        //             creep.moveTo(Game.getObjectById(creep.memory.target));
-        //
-        //             let Error = creep.build(creep.build(Game.getObjectById(creep.memory.target)));
-        //             if (Error === OK) {
-        //                 creep.memory.action = 6;
-        //             } else if (Error === ERR_NOT_ENOUGH_RESOURCES) {
-        //                 creep.memory.action = 1;
-        //             } else if (Error === ERR_INVALID_TARGET) {
-        //                 creep.memory.action = 2;
-        //             }
-        //             break
-        //         case 5:
-        //             //Pickup
-        //             creep.pickup(Game.getObjectById(creep.memory.target));
-        //             if (creep.pickup(Game.getObjectById(creep.memory.target)) !== OK && creep.store.getUsedCapacity() !== creep.store.getCapacity()) {
-        //                 creep.memory.action = 1;
-        //             } else if (creep.store.getUsedCapacity() === creep.store.getCapacity()) {
-        //                 rounds++;
-        //                 if (repair === true) {
-        //                     let struct = creep.room.find(FIND_STRUCTURES);
-        //                     for (const name in struct) {
-        //                         if (struct[i].hits < struct[i].hitsMax) {
-        //                             creep.memory.target = struct[i].id;
-        //                             creep.memory.action = 7;
-        //                             break
-        //                         }
-        //                     }
-        //                 } else {
-        //                     creep.memory.action = 2;
-        //                 }
-        //
-        //             }
-        //             break
-        //         case 6:
-        //             //Build
-        //             creep.build(creep.build(Game.getObjectById(creep.memory.target)));
-        //             if (creep.store.getUsedCapacity() === 0) {
-        //                 rounds++;
-        //                 creep.memory.action = 1;
-        //             }
-        //             break
-        //         case 7:
-        //             creep.moveTo(Game.getObjectById(creep.memory.target));
-        //             if (creep.repair(Game.getObjectById(creep.memory.target)) === OK) {
-        //                 creep.memory.action = 8;
-        //             }
-        //             break
-        //         case 8:
-        //             creep.repair(Game.getObjectById(creep.memory.target));
-        //             if (Game.getObjectById(creep.memory.target).hits === Game.getObjectById(creep.memory.target).hitsMax || creep.store.getUsedCapacity() === 0) {
-        //                 creep.memory.action = 1;
-        //             } else if (Game.getObjectById(creep.memory.target).hits === Game.getObjectById(creep.memory.target).hitsMax && creep.store.getUsedCapacity() !== 0) {
-        //                 let struct = creep.room.find(FIND_STRUCTURES);
-        //                 for (const name in struct) {
-        //                     if (struct[i].hits < struct[i].hitsMax) {
-        //                         creep.memory.target = struct[i].id;
-        //                         creep.memory.action = 7;
-        //                         break
-        //                     }
-        //                 }
-        //             }
-        //             break
-        //     }
-        //     creep.say('B' + creep.memory.action);
-        // }
+        creep.memory.actionb = action;
+        creep.memory.source = source;
+        return (Game.cpu.getUsed() - time);
+
     }
 };
 module.exports = Builder;

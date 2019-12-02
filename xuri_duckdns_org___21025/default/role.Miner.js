@@ -9,9 +9,10 @@
 var Miner = {
 
     run: function (creep) {
-
+        let time = Game.cpu.getUsed();
         let MoveToResourceUMine = {
             MoveR: function () {
+
                 if (creep.memory.source === null) {
                     let path = creep.pos.findClosestByPath(FIND_SOURCES);
 
@@ -23,7 +24,7 @@ var Miner = {
                         creep.memory.deathtimer = creep.room.findPath(creep.pos, Game.getObjectById(creep.memory.source).pos).length + 20;
                     }
 
-                } else if (creep.harvest(Game.getObjectById(creep.memory.source)) !== OK) {
+                } else if (creep.harvest(Game.getObjectById(creep.memory.source)) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(Game.getObjectById(creep.memory.source));
 
                     if (creep.memory.deathtimer === 0) {
@@ -36,6 +37,7 @@ var Miner = {
 
         };
         MoveToResourceUMine.MoveR();
+       return (Game.cpu.getUsed()-time);
     }
 };
 
