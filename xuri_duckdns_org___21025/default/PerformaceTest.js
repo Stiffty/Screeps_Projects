@@ -91,10 +91,10 @@ let test = {
                 }
 
             }
-            if (direction === 10) {
+            if (direction === 1) {
                 let px = x;
                 let py = y - 5;
-                let return1 = false
+                let return1 = false;
                 for (let i = 0; i < 2; i++) {
                     for (let yb = y - 5; yb <= y + 5; yb++) {
                         if (!Game.spawns['Spawn1'].room.lookForAt(LOOK_STRUCTURES,px, yb)[0]&&Game.spawns['Spawn1'].room.lookForAt(LOOK_TERRAIN,px, yb)[0] !== 'wall') {
@@ -114,61 +114,26 @@ let test = {
                     py = y + 5;
                     if(return1 === true){
                         break
-                    }for (let yb = y - 5; yb <= y + 5; yb++) {
-                        if (!Game.spawns['Spawn1'].room.lookForAt(LOOK_STRUCTURES,px, yb)[0]&&Game.spawns['Spawn1'].room.lookForAt(LOOK_TERRAIN,px, yb)[0] !== 'wall') {
-                        }else{
-                            return1 = true;
-                            break
-                        }
-                    }
-                    px = x + 11;
-                    for (let xb = x + 1; xb <= x + 10; xb++) {
-                        if (!Game.spawns['Spawn1'].room.lookForAt(LOOK_STRUCTURES,xb, py)[0]&&Game.spawns['Spawn1'].room.lookForAt(LOOK_TERRAIN,xb, py)[0] !== 'wall') {
-                        }else{
-                            return1 = true;
-                            break
-                        }
-                    }
-                    py = y + 5;
-                    if(return1 === true){
-                        break
                     }
 
-                    for (let yb = y - 5; yb <= y + 5; yb++) {
-                        Game.spawns['Spawn1'].room.visual.text('O', px, yb);
-                    }
-                    px = x + 11;
-                    for (let xb = x + 1; xb <= x + 10; xb++) {
-                        Game.spawns['Spawn1'].room.visual.text('T', xb, py);
-                    }
-                    py = y + 5;
                 }
-                if(return1 === false){
+                if(return1 === false) {
                     //Complete Check
                     px = x;
                     py = y - 5;
                     for (let i = 0; i < 2; i++) {
                         for (let yb = y - 5; yb <= y + 5; yb++) {
-                            if (!Game.spawns['Spawn1'].room.lookForAt(LOOK_STRUCTURES,px, yb)[0]&&Game.spawns['Spawn1'].room.lookForAt(LOOK_TERRAIN,px, yb)[0] !== 'wall') {
-                            }else{
-                                return1 = true;
-                                break
-                            }
+                            Game.spawns['Spawn1'].room.visual.text('🟩', px, yb);
                         }
                         px = x + 11;
                         for (let xb = x + 1; xb <= x + 10; xb++) {
-                            if (!Game.spawns['Spawn1'].room.lookForAt(LOOK_STRUCTURES,xb, py)[0]&&Game.spawns['Spawn1'].room.lookForAt(LOOK_TERRAIN,xb, py)[0] !== 'wall') {
-                            }else{
-                                return1 = true;
-                                break
-                            }
+                            Game.spawns['Spawn1'].room.visual.text('🟩', xb, py);
                         }
                         py = y + 5;
-                        if(return1 === true){
-                            break
-                        }
+
                     }
                 }
+
             } else if (direction === 2) {
                 let px = x;
                 let py = y - 5;
@@ -200,6 +165,7 @@ let test = {
                 }
 
                 if(return1 === false){
+                    //Complete check
                     px = x;
                     py = y - 5;
                     for (let i = 0; i < 2; i++) {
@@ -220,33 +186,91 @@ let test = {
                         py = y + 5;
                     }
                 }
-            }else if(direction === 30){
+            }else if(direction === 3){
                 let px = x - 5;
                 let py = y;
+                let return1 = false;
                 for (let i = 0; i < 2; i++) {
                     for (let xb = x - 5; xb <= x + 5; xb++) {
-                        Game.spawns['Spawn1'].room.visual.text('O', xb, py);
+                        if (!Game.spawns['Spawn1'].room.lookForAt(LOOK_STRUCTURES,xb, py)[0]&&Game.spawns['Spawn1'].room.lookForAt(LOOK_TERRAIN,xb, py)[0] !== 'wall') {
+                        }else{
+                            return1 = true;
+                            break
+                        }
 
                     }
                     py = y + 11;
                     for (let yb = y + 1; yb <= y + 10; yb++) {
-                        Game.spawns['Spawn1'].room.visual.text('T', px, yb);
+                        if (!Game.spawns['Spawn1'].room.lookForAt(LOOK_STRUCTURES,px, yb)[0]&&Game.spawns['Spawn1'].room.lookForAt(LOOK_TERRAIN,px, yb)[0] !== 'wall') {
+                        }else{
+                            return1 = true;
+                            break
+                        }
                     }
                     px = x + 5;
+                    if(return1 === true){
+                        break
+                    }
                 }
-            }else if(direction === 40){
+
+                if(return1 === false){
+                    //Complete check
+                    px = x - 5;
+                    py = y;
+
+                    for (let i = 0; i < 2; i++) {
+                        for (let xb = x - 5; xb <= x + 5; xb++) {
+
+                            Game.spawns['Spawn1'].room.visual.text('🟩', xb, py);
+
+                        }
+                        py = y + 11;
+                        for (let yb = y + 1; yb <= y + 10; yb++) {
+                            Game.spawns['Spawn1'].room.visual.text('🟩', px, yb);
+                        }
+                        px = x + 5;
+                    }
+                }
+            }else if(direction === 4){
                 let px = x - 5;
                 let py = y;
+                let return1 = false;
                 for (let i = 0; i < 2; i++) {
                     for (let xb = x - 5; xb <= x + 5; xb++) {
-                        Game.spawns['Spawn1'].room.visual.text('O', xb, py);
+                        if (!Game.spawns['Spawn1'].room.lookForAt(LOOK_STRUCTURES,xb, py)[0]&&Game.spawns['Spawn1'].room.lookForAt(LOOK_TERRAIN,xb, py)[0] !== 'wall') {
+                        }else{
+                            return1 = true;
+                            break
+                        }
 
                     }
                     py = y - 11;
                     for (let yb = y - 1; yb >= y - 10; yb--) {
-                        Game.spawns['Spawn1'].room.visual.text('T', px, yb);
+                        if (!Game.spawns['Spawn1'].room.lookForAt(LOOK_STRUCTURES,px, yb)[0]&&Game.spawns['Spawn1'].room.lookForAt(LOOK_TERRAIN,px, yb)[0] !== 'wall') {
+                        }else{
+                            return1 = true;
+                            break
+                        }
                     }
                     px = x + 5;
+                    if(return1 === true){
+                        break
+                    }
+                }
+                if(return1 === false){
+                    px = x - 5;
+                    py = y;
+                    for (let i = 0; i < 2; i++) {
+                        for (let xb = x - 5; xb <= x + 5; xb++) {
+                            Game.spawns['Spawn1'].room.visual.text('🟩', xb, py);
+
+                        }
+                        py = y - 11;
+                        for (let yb = y - 1; yb >= y - 10; yb--) {
+                            Game.spawns['Spawn1'].room.visual.text('🟩', px, yb);
+                        }
+                        px = x + 5;
+                    }
                 }
             }
         }
