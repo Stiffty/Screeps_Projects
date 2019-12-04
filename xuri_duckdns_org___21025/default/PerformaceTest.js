@@ -122,14 +122,14 @@ let test = {
                     px = x;
                     py = y - 5;
                     for (let i = 0; i < 2; i++) {
-                        for (let yb = y - 5; yb <= y + 5; yb++) {
+                        for (let yb = y - 5; yb <= y + 6; yb++) {//yb <= y + 6   +1
                             Game.spawns['Spawn1'].room.visual.text('🟩', px, yb);
                         }
                         px = x + 11;
                         for (let xb = x + 1; xb <= x + 10; xb++) {
-                            Game.spawns['Spawn1'].room.visual.text('🟩', xb, py);
+                            Game.spawns['Spawn1'].room.visual.text('🟥', xb, py);
                         }
-                        py = y + 5;
+                        py = y + 6;//+1
 
                     }
                 }
