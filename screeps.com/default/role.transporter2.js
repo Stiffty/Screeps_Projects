@@ -24,18 +24,11 @@ var Transporter = {
                 let cx = creep.pos.x;
                 let cy = creep.pos.y;
 
+
                 let sx = Game.getObjectById(source).pos.x;
                 let sy = Game.getObjectById(source).pos.y;
 
-                let x = Math.abs(cx-sx);
-                let y = Math.abs(cy-sy);
-
-               let final = x+y;
-               if(x === 0||y === 0){
-                   final++;
-               }
-
-                return final;
+                return Math.abs(cx-sx)+Math.abs(cy-sy);
             }
         }
 
@@ -60,6 +53,7 @@ var Transporter = {
                 } else if (checkDistance.check()<=2) {
                     creep.transfer(Game.getObjectById(source), RESOURCE_ENERGY);
                 }else{
+                    console.log(checkDistance.check());
                     creep.moveTo(Game.getObjectById(source));
                 }
             }

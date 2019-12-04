@@ -9,7 +9,7 @@
 var Upgrader = {
 
     run: function (creep) {
-
+        let time = Game.cpu.getUsed();
         if (creep.upgradeController(creep.room.controller)=== (ERR_NOT_ENOUGH_RESOURCES)) {
 
             let target = creep.room.controller;
@@ -21,6 +21,7 @@ var Upgrader = {
         if(Game.creeps[creep.memory.transporter] === undefined){
             creep.memory.transporter = null;
         }
+       return (Game.cpu.getUsed()-time);
     }
 };
 

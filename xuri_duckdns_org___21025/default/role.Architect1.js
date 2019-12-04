@@ -78,7 +78,6 @@ let Architect = {
                     }
                 }
             }
-        creep.suicide();
         }
 };
 

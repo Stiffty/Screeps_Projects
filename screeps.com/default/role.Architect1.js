@@ -48,9 +48,7 @@ let Architect = {
                             });
 
                             // Avoid creeps in the room
-                            room.find(FIND_CREEPS).forEach(function (creep) {
-                                costs.set(creep.pos.x, creep.pos.y, 0xff);
-                            });
+
 
                             return costs;
                         },
@@ -64,11 +62,11 @@ let Architect = {
             }
 
             Spos = Game.spawns['Spawn1'].pos;
-            Startx = Spos.x-3;
-            starty = Spos.y-3;
+            Startx = Spos.x-2;
+            starty = Spos.y-2;
 
-            for(let x = Startx;x<(Startx+7);x++){
-                for (let y = starty;y<(starty+7);y++){
+            for(let x = Startx;x<(Startx+5);x++){
+                for (let y = starty;y<(starty+5);y++){
                     if(creep.room.getTerrain().get(x,y) !== 1) {
                         if ((x === (Spos.x - 2) && y === (Spos.y - 2)) || (x === (Spos.x + 2) && y === (Spos.y - 2))
                             || (x === (Spos.x - 2) && y === (Spos.y + 2)) || (x === (Spos.x + 2) && y === (Spos.y + 2))) {
@@ -80,7 +78,6 @@ let Architect = {
                     }
                 }
             }
-        creep.suicide();
         }
 };
 

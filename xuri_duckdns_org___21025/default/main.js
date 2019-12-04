@@ -5,6 +5,7 @@ var upgrader = require('role.Upgrader');
 var Architect = require('role.Architect1');
 var Builder = require('role.Builder1');
 var PTest = require('PerformaceTest');
+var Architect2 = require('role.Architect2');
 
 module.exports.loop = function () {
 
@@ -22,8 +23,7 @@ module.exports.loop = function () {
     let time = 0;
 
     let repair = false;
-
-   PTest.run();
+    PTest.run();
     //
     // let struct = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES);
     //
@@ -46,10 +46,8 @@ module.exports.loop = function () {
 
             if (Game.spawns['Spawn1'].memory.builder1 === undefined) {
                 Game.spawns['Spawn1'].memory.builder1 = true;
-            }
-            if (Game.spawns['Spawn1'].memory.builder1 === true) {
-                Game.spawns['Spawn1'].createCreep([MOVE], 'Hans', {optPath: null, role: 'Architect'});
-                Architect.run(Game.creeps['Hans']);
+            }else if (Game.spawns['Spawn1'].memory.builder1 === true) {
+                Architect2.run(spawn);
                 Game.spawns['Spawn1'].memory.builder1 = false;
             }
 
@@ -58,7 +56,7 @@ module.exports.loop = function () {
                 Transporteranzahl = 4;
                 UpgraderAnzahl = 4;
             }
-            if (Game.spawns['Spawn1'].spawning === true) {
+            if (spawn.spawning === true) {
                 let spw = Game.spawns['Spawn1'];
                 spw.room.visual.text(':tools:' + Game.creeps[spw.spawning.name].memory.action, spw.pos.x + 1, spw.pos.y, {
                     align: 'left',
@@ -81,8 +79,7 @@ module.exports.loop = function () {
                     if (time > timeMiner) {
                         timeMiner = time;
                     }
-                }
-                if (creep.memory.role === 'Transporter') {
+                }else if (creep.memory.role === 'Transporter') {
                     if (creep.ticksToLive < 50 || (Game.spawns['Spawn1'].renewCreep() === OK && creep.ticksToLive > 1400)) {
                         creep.moveTo(Game.spawns['Spawn1'].pos);
                     } else if (Game.spawns['Spawn1'].store[RESOURCE_ENERGY] === 300 && creep.room.find(FIND_MY_CONSTRUCTION_SITES).length > 0 && UpgraderAnzahl === 0) {
@@ -98,14 +95,15 @@ module.exports.loop = function () {
                         }
                     }
 
-                }
-                if (creep.memory.role === 'Upgrader') {
+                }else if (creep.memory.role === 'Upgrader') {
                     time = upgrader.run(creep);
                     if (time > timeUpgrader) {
                         timeUpgrader = time;
                     }
                 }
             }
+            break
+        case 2:
             break
     }
 

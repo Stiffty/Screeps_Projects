@@ -60,6 +60,7 @@ var Transporter = {
                 } else if (checkDistance.check()<=2) {
                     creep.transfer(Game.getObjectById(source), RESOURCE_ENERGY);
                 }else{
+                    console.log(checkDistance.check());
                     creep.moveTo(Game.getObjectById(source));
                 }
             }
@@ -111,6 +112,7 @@ var Transporter = {
                 source = null;
                 action = 2;
             }
+            console.log(Game.getObjectById(source));
             SpawnFuellen.fuellen();
         } else if (creep.memory.client !== null) {
             if (action !== 3) {

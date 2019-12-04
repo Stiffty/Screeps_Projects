@@ -77,9 +77,9 @@ let Architect = {
                 }
             }
         }
-        // let x2 = creep.pos.x + 2;
-        // creep.room.createConstructionSite(x2, creep.pos.y, STRUCTURE_RAMPART);
-        // creep.room.createConstructionSite(x2, creep.pos.y, STRUCTURE_TOWER);
+        let x2 = creep.pos.x + 2;
+        creep.room.createConstructionSite(x2, creep.pos.y, STRUCTURE_RAMPART);
+        creep.room.createConstructionSite(x2, creep.pos.y, STRUCTURE_TOWER);
 
         let posAx = creep.pos.x;
         let posAy = creep.pos.y;
@@ -88,98 +88,19 @@ let Architect = {
         let ny;
 
         //Oben
-        //let counter = 0;
-        // for(let Ay = posAy;Ay>0;Ay--){
-        //
-        //     for (let x = posAx-1; x <= posAx+1; x++) {
-        //         for (let y = Ay-3; y <= Ay; y++) {
-        //             // if (creep.room.lookForAt(LOOK_STRUCTURES,x,y) === undefined&&creep.room.lookForAt(LOOK_TERRAIN,x,y) !== 'plain') {
-        //             //     creep.room.createConstructionSite(x, y, STRUCTURE_ROAD);
-        //             // }
-        //             counter++;
-        //             creep.room.createConstructionSite(x, y, STRUCTURE_ROAD);
-        //         }
-        //     }
-        //
-        // }
-        // console.log(counter);
-        // let t = false;
-        // let size = 10;
-        //
-        // for(let x = 0;x < 49;x++){
-        //     for(let y = 0;y < 49;y++){
-        //
-        //         for(let xn = x;xn<x+10;xn++){
-        //             for(let yn = y;yn<y+10;yn++){
-        //                 if (creep.room.lookForAt(LOOK_STRUCTURES,x,y)&&creep.room.lookForAt(LOOK_TERRAIN,x,y) !== 'plain') {
-        //
-        //                 }
-        //             }
-        //         }
-        //
-        //     }
-        // }
+        for(let Ay = posAy;Ay<0;Ay++){
 
-        let x = 25;
-        let xcounter = 1;
-        let y = 32;
-        let ycounter = 1;
-        let counter = 0;
-        let switch1 = 1;
-        let switch2 = 1;
-
-        for (let c = 0; c < 24; c++) {//2401
-            if (switch1 === 1) {
-                //y
-                if (switch2 === 1) {
-                    //+
-                    y++;
-                    counter++;
-                    creep.room.visual.text('y+',x,y);
-                    if (counter === ycounter) {
-                        ycounter++;
-                        counter = 0;
-                        switch1 = 2;
-                    }
-                } else {
-                    y--;
-                    counter++;
-                    creep.room.visual.text('y-',x,y);
-                    if (counter === ycounter) {
-                        ycounter++;
-                        counter = 0;
-                        switch1 = 2;
-                    }
+            for (let x = posAx-1; x <= posAx+1; x++) {
+                for (let y = posAy-3; y <= posAy; y++) {
+                    // if (creep.room.lookForAt(LOOK_STRUCTURES,x,y) === undefined&&creep.room.lookForAt(LOOK_TERRAIN,x,y) !== 'plain') {
+                    //     creep.room.createConstructionSite(x, y, STRUCTURE_ROAD);
+                    // }
+                    creep.room.createConstructionSite(x, y, STRUCTURE_ROAD);
                 }
-
-            } else {
-                //x
-                if (switch2 === 1) {
-                    //+
-                    x++;
-                    counter++;
-                    creep.room.visual.text('x+',x,y);
-                    if (counter === xcounter) {
-                        xcounter++;
-                        counter = 0;
-                        switch1 = 1;
-                        switch2 = 2;
-                    }
-                } else {
-                    x--;
-                    counter++;
-                    creep.room.visual.text('x-',x,y);
-                    if (counter === xcounter) {
-                        xcounter++;
-                        counter = 0;
-                        switch1 = 1;
-                        switch2 = 1;
-                    }
-                }
-
             }
-           // creep.room.visual.text(c,x,y);
+
         }
+
 
     }
 };

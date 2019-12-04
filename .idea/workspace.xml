@@ -2,12 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0d75f6c-2745-4f8b-a654-9c4c54c26c73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Architect2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Builder2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.transporter2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/structure.Spawner2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/swc_screepspl_us___21025/.sync" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/swc_screepspl_us___21025/default/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/.sync" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.Architect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.Builder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.Miner.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/role.Miner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.Upgrader.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/role.Upgrader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/role.transporter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/structure.Spawner.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/.sync" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/PerformaceTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/PerformaceTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Architect1.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Architect1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Architect2.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Architect2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Builder1.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.Builder1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.transporter1.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/role.transporter1.js" afterDir="false" />
     </list>
@@ -58,7 +68,10 @@
       <workItem from="1575029250670" duration="11741000" />
       <workItem from="1575062310258" duration="5932000" />
       <workItem from="1575110649553" duration="45452000" />
-      <workItem from="1575292131666" duration="19656000" />
+      <workItem from="1575292131666" duration="20426000" />
+      <workItem from="1575380058994" duration="7428000" />
+      <workItem from="1575401015347" duration="7200000" />
+      <workItem from="1575467140733" duration="12911000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1574864796945</created>
@@ -144,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575313198486</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Status: Performance for first lvl finished&#10;TO DO: Second Controller Lvl">
+      <created>1575318250627</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1575318250627</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
