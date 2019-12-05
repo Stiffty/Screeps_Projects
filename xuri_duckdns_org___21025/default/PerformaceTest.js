@@ -169,7 +169,102 @@ let test = {
 
                             }
                             Game.spawns['Spawn1'].room.visual.text('🟥', cx, cy);
-                            return;
+
+                            if(cx === x&&cy === y){
+                                //links
+                                //build rampards
+                                let oy = y-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', x, oy+i);
+                                }
+
+                                let xa = cx+1;
+                                let ya = cy-4;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dx === cx+1||dy === ya+1||dy===ya+4||dy===ya+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+
+                            }else if(cx === x+5&&cy === y+5){
+                                //oben
+                                //build rampards
+                                let ox = x-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', ox+i, y);
+                                }
+
+                                let xa = cx-4;
+                                let ya = cy+1;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dy === cy+1||dx === xa+1||dx===xa+4||dx===xa+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+                            }else if(cx === x+5&&cy === y-5){
+                                //unten
+
+                                //build rampards
+                                let ox = x-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', ox+i, y);
+                                }
+
+                                let xa = cx-4;
+                                let ya = cy-9;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dy === cy-1||dx === xa+1||dx===xa+4||dx===xa+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+                            }else if(cx === x+10&&cy === y){
+
+                                //rechts
+
+                                //build rampards
+                                let oy = y-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', x, oy+i);
+                                }
+
+                                let xa = cx-9;
+                                let ya = cy-4;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dx === cx-1||dy === ya+1||dy===ya+4||dy===ya+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+
+                            }
+                            //return;
                         }
                     }
 
@@ -253,7 +348,99 @@ let test = {
                                 py = y + 5;
                             }
                             Game.spawns['Spawn1'].room.visual.text('🟥', cx, cy);
-                            return;
+
+                            if(cx === x&&cy === y){
+                                //rechts
+
+                                //build rampards
+                                let oy = y-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', x, oy+i);
+                                }
+
+                                let xa = cx-9;
+                                let ya = cy-4;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dx === cx-1||dy === ya+1||dy===ya+4||dy===ya+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+                            }else if(cx === x-5&&cy === y-5){
+                                //oben
+                                //build rampards
+                                let ox = x-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', ox+i, y);
+                                }
+
+                                let xa = cx-4;
+                                let ya = cy+1;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dy === cy+1||dx === xa+1||dx===xa+4||dx===xa+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+                            }else if(cx === x-5&&cy === y+5){
+                                //unten
+
+                                //build rampards
+                                let ox = x-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', ox+i, y);
+                                }
+
+                                let xa = cx-4;
+                                let ya = cy-9;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dy === cy-1||dx === xa+1||dx===xa+4||dx===xa+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+                            }else if(cx === x-10&&cy === y){
+                                //links
+                                //build rampards
+                                let oy = y-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', x, oy+i);
+                                }
+
+                                let xa = cx+1;
+                                let ya = cy-4;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dx === cx+1||dy === ya+1||dy===ya+4||dy===ya+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+                            }
+                            //return;
                         }
                     }
                 } else if (direction === 3) {
@@ -335,7 +522,100 @@ let test = {
                                 px = x + 5;
                             }
                             Game.spawns['Spawn1'].room.visual.text('🟥', cx, cy);
-                            return;
+
+                            if(cx === x&&cy === y){
+                                //oben
+                                //build rampards
+                                let ox = x-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', ox+i, y);
+                                }
+
+                                let xa = cx-4;
+                                let ya = cy+1;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dy === cy+1||dx === xa+1||dx===xa+4||dx===xa+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+
+                            }else if(cx === x-10&&cy === y){
+                                //unten
+
+                                //build rampards
+                                let ox = x-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', ox+i, y);
+                                }
+
+                                let xa = cx-4;
+                                let ya = cy-9;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dy === cy-1||dx === xa+1||dx===xa+4||dx===xa+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+                            }else if(cx === x-5&&cy === y+5){
+                                //links
+                                //build rampards
+                                let oy = y-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', x, oy+i);
+                                }
+
+                                let xa = cx+1;
+                                let ya = cy-4;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dx === cx+1||dy === ya+1||dy===ya+4||dy===ya+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+                            }else if(cx === x+5&&cy === y+5){
+                                //rechts
+
+                                //build rampards
+                                let oy = y-2;
+                                for(let i = 0;i<5;i++){
+                                    //remove constSide
+                                    spawn.room.visual.text('🔵', x, oy+i);
+                                }
+
+                                let xa = cx-9;
+                                let ya = cy-4;
+
+                                for(let dx = xa;dx<=xa+8;dx++){
+                                    for(let dy = ya;dy<=ya+8;dy++){
+                                        if(dx === cx-1||dy === ya+1||dy===ya+4||dy===ya+7){
+                                            spawn.room.visual.text('⬜', dx, dy);
+                                        }else{
+                                            spawn.room.visual.text('🟡', dx, dy);
+                                        }
+                                    }
+                                }
+
+                            }
+                            //return;
                         }
                     }
                 } else if (direction === 4) {
@@ -514,9 +794,7 @@ let test = {
                                 }
 
                             }
-
-
-                            return;
+                            //return;
                         }
                     }
                 }

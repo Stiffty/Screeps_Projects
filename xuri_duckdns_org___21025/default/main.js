@@ -23,7 +23,7 @@ module.exports.loop = function () {
     let time = 0;
 
     let repair = false;
-    PTest.run(spawn);
+    //PTest.run(spawn);
     //
     // let struct = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES);
     //
@@ -44,11 +44,11 @@ module.exports.loop = function () {
             UpgraderAnzahl = 0;
 
 
-            if (Game.spawns['Spawn1'].memory.builder1 === undefined) {
-                Game.spawns['Spawn1'].memory.builder1 = true;
-            }else if (Game.spawns['Spawn1'].memory.builder1 === true) {
-                Architect2.run(spawn);
-                Game.spawns['Spawn1'].memory.builder1 = false;
+            if (Game.spawns['Spawn1'].memory.builder3 === undefined) {
+                Game.spawns['Spawn1'].memory.builder3 = true;
+            }else if (Game.spawns['Spawn1'].memory.builder3 === true) {
+                Architect.run(spawn);
+                Game.spawns['Spawn1'].memory.builder3 === false;
             }
 
             //Wenn alles gebaut wurde
@@ -104,6 +104,69 @@ module.exports.loop = function () {
             }
             break
         case 2:
+            MinerAnzahl = 7;
+            Transporteranzahl = 10;
+            UpgraderAnzahl = 0;
+
+
+            if (Game.spawns['Spawn1'].memory.builder3 === undefined) {
+                Game.spawns['Spawn1'].memory.builder3 = true;
+            }else if (Game.spawns['Spawn1'].memory.builder3 === true) {
+                Architect.run(spawn);
+                Game.spawns['Spawn1'].memory.builder3 = false;
+            }
+
+            //Wenn alles gebaut wurde
+            if (Game.spawns['Spawn1'].room.find(FIND_MY_CONSTRUCTION_SITES).length === 0) {
+                Transporteranzahl = 4;
+                UpgraderAnzahl = 4;
+            }
+            if (spawn.spawning === true) {
+                let spw = Game.spawns['Spawn1'];
+                spw.room.visual.text(':tools:' + Game.creeps[spw.spawning.name].memory.action, spw.pos.x + 1, spw.pos.y, {
+                    align: 'left',
+                    opacity: 0.7
+                });
+            } else {
+                time = spawner.run(MinerAnzahl, UpgraderAnzahl, Transporteranzahl, spawn);
+                if (time > timeSpawn) {
+                    timeSpawn = time;
+                }
+            }
+
+            for (const name in Game.creeps) {
+
+                let creep = Game.creeps[name];
+
+
+                if (creep.memory.role === 'Miner') {
+                    time = miner.run(creep);
+                    if (time > timeMiner) {
+                        timeMiner = time;
+                    }
+                }else if (creep.memory.role === 'Transporter') {
+                    if (creep.ticksToLive < 50 || (Game.spawns['Spawn1'].renewCreep() === OK && creep.ticksToLive > 1400)) {
+                        creep.moveTo(Game.spawns['Spawn1'].pos);
+                    } else if (Game.spawns['Spawn1'].store[RESOURCE_ENERGY] === 300 && creep.room.find(FIND_MY_CONSTRUCTION_SITES).length > 0 && UpgraderAnzahl === 0) {
+                        time = Builder.run(creep, repair);
+                        if (time > timeBuilder) {
+                            timeBuilder = time;
+                        }
+
+                    } else {
+                        time = transporter.run(creep, UpgraderAnzahl);
+                        if (time > timeTransporter) {
+                            timeTransporter = time;
+                        }
+                    }
+
+                }else if (creep.memory.role === 'Upgrader') {
+                    time = upgrader.run(creep);
+                    if (time > timeUpgrader) {
+                        timeUpgrader = time;
+                    }
+                }
+            }
             break
     }
 

@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e0d75f6c-2745-4f8b-a654-9c4c54c26c73" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screeps.com/default/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/screeps.com/default/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/.sync" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/.sync" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/PerformaceTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/PerformaceTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/xuri_duckdns_org___21025/default/main.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +59,7 @@
       <workItem from="1575380058994" duration="7428000" />
       <workItem from="1575401015347" duration="7200000" />
       <workItem from="1575467140733" duration="15284000" />
-      <workItem from="1575558286977" duration="14142000" />
+      <workItem from="1575558286977" duration="16969000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1574864796945</created>
@@ -178,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575564775060</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Status: Search Algo near finished ++&#10;TO DO: implement &amp; fix search">
+      <created>1575573934955</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1575573934956</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,6 +221,7 @@
     <MESSAGE value="Status: Search Algo near finished&#10;TO DO: implement" />
     <MESSAGE value="Status: Search Algo near finished&#10;TO DO: implement &amp; fix search" />
     <MESSAGE value="Status: Search Algo near finished + fixed&#10;TO DO: implement &amp; fix search" />
-    <option name="LAST_COMMIT_MESSAGE" value="Status: Search Algo near finished + fixed&#10;TO DO: implement &amp; fix search" />
+    <MESSAGE value="Status: Search Algo near finished ++&#10;TO DO: implement &amp; fix search" />
+    <option name="LAST_COMMIT_MESSAGE" value="Status: Search Algo near finished ++&#10;TO DO: implement &amp; fix search" />
   </component>
 </project>
