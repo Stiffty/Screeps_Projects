@@ -23,7 +23,7 @@ module.exports.loop = function () {
     let time = 0;
 
     let repair = false;
-    PTest.run();
+    PTest.run(spawn);
     //
     // let struct = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES);
     //
