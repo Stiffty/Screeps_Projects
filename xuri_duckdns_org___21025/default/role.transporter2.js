@@ -24,11 +24,18 @@ var Transporter = {
                 let cx = creep.pos.x;
                 let cy = creep.pos.y;
 
-
                 let sx = Game.getObjectById(source).pos.x;
                 let sy = Game.getObjectById(source).pos.y;
 
-                return Math.abs(cx-sx)+Math.abs(cy-sy);
+                let x = Math.abs(cx-sx);
+                let y = Math.abs(cy-sy);
+
+                let final = x+y;
+                if(x === 0||y === 0){
+                    final++;
+                }
+
+                return final;
             }
         }
 
@@ -53,11 +60,32 @@ var Transporter = {
                 } else if (checkDistance.check()<=2) {
                     creep.transfer(Game.getObjectById(source), RESOURCE_ENERGY);
                 }else{
-                    console.log(checkDistance.check());
                     creep.moveTo(Game.getObjectById(source));
                 }
             }
         };
+
+        let CointainerFüllen = {
+            container: function () {
+                if (source === null) {
+                    source = creep.pos.findClosestByPath(FIND_STRUCTURES,{
+                        filter: function(object) {
+                            if(object.structureType === STRUCTURE_CONTAINER){
+                                if(object.store.getFreeCapacity()>creep.store.getCapacity()){
+                                    return object;
+                                }
+                            }
+                        }
+                    });
+                } else if (checkDistance.check()<=2) {
+                    creep.transfer(Game.getObjectById(source), RESOURCE_ENERGY);
+                }else{
+                    creep.moveTo(Game.getObjectById(source));
+                }
+
+
+            }
+        }
 
         let Upgrader = {
             upgrader: function () {
@@ -114,13 +142,15 @@ var Transporter = {
             Upgrader.upgrader();
         } else if (creep.memory.client === null) {
             UpgraderFinden.Find();
+            if(creep.memory.client === null){
+
+            }
         }
         creep.memory.action = action;
         creep.memory.source = source;
 
 
         return (Game.cpu.getUsed() - time);
-
 
     }
 };

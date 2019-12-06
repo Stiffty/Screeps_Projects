@@ -44,11 +44,11 @@ module.exports.loop = function () {
             UpgraderAnzahl = 0;
 
 
-            if (Game.spawns['Spawn1'].memory.builder3 === undefined) {
-                Game.spawns['Spawn1'].memory.builder3 = true;
-            }else if (Game.spawns['Spawn1'].memory.builder3 === true) {
+            if (Game.spawns['Spawn1'].memory.builder1 === undefined) {
+                Game.spawns['Spawn1'].memory.builder1 = true;
+            }else if (Game.spawns['Spawn1'].memory.builder1 === true) {
                 Architect.run(spawn);
-                Game.spawns['Spawn1'].memory.builder3 === false;
+                Game.spawns['Spawn1'].memory.builder1 === false;
             }
 
             //Wenn alles gebaut wurde
@@ -109,11 +109,11 @@ module.exports.loop = function () {
             UpgraderAnzahl = 0;
 
 
-            if (Game.spawns['Spawn1'].memory.builder3 === undefined) {
-                Game.spawns['Spawn1'].memory.builder3 = true;
-            }else if (Game.spawns['Spawn1'].memory.builder3 === true) {
+            if (Game.spawns['Spawn1'].memory.builder2 === undefined) {
+                Game.spawns['Spawn1'].memory.builder2 = true;
+            }else if (Game.spawns['Spawn1'].memory.builder2 === true) {
                 Architect.run(spawn);
-                Game.spawns['Spawn1'].memory.builder3 = false;
+                Game.spawns['Spawn1'].memory.builder2 = false;
             }
 
             //Wenn alles gebaut wurde
@@ -168,6 +168,14 @@ module.exports.loop = function () {
                 }
             }
             break
+        case 3:
+            if (Game.spawns['Spawn1'].memory.builder3 === undefined) {
+                Game.spawns['Spawn1'].memory.builder3 = true;
+            }else if (Game.spawns['Spawn1'].memory.builder3 === true) {
+                Architect2.run(spawn);
+                Game.spawns['Spawn1'].memory.builder3 = false;
+            }
+            break
     }
 
 
@@ -208,7 +216,7 @@ module.exports.loop = function () {
     //
     //
     // }
-    // let t = creep.room.find(FIND_MY_CONSTRUCTION_SITES);
+    // let t = spawn.room.find(FIND_MY_CONSTRUCTION_SITES);
     // for(const i in t){
     //     t[i].remove();
     // }
