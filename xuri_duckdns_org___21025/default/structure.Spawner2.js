@@ -8,7 +8,7 @@
  */
 
 var Spawner = {
-    run: function (Spawnlimit_Miner, Spawnlimit_Upgrader,Spawnlimit_Transporter,spawn) {
+    run: function (Spawnlimit_Miner, Spawnlimit_Upgrader,Spawnlimit_Transporter,Spawnlimit_transfer) {
 
         let time = Game.cpu.getUsed();
 
@@ -17,6 +17,7 @@ var Spawner = {
         let Miner = 0;
         let Transporter = 0;
         let Upgrader = 0;
+        let transfer = 0;
 
         for(const i in creeps){
             if(creeps[i].memory.role === 'Transporter'){
@@ -25,6 +26,8 @@ var Spawner = {
                 Upgrader++;
             } else if(creeps[i].memory.role === 'Miner'){
                 Miner++;
+            }else if(creeps[i].memory.role === 'transfer'){
+                transfer++;
             }
         }
         //let Transporter = _(Game.creeps).filter({memory: {role: 'Transporter'}}).value().length;
@@ -49,6 +52,10 @@ var Spawner = {
                 transporter: null
             });
 
+        }else if(transfer < Spawnlimit_transfer){
+            Game.spawns['Spawn1'].createCreep([MOVE, MOVE, CARRY,CARRY], undefined, {
+                role: 'transfer'
+            });
         }
        return (Game.cpu.getUsed()-time);
     }

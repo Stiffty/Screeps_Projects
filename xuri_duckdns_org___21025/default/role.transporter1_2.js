@@ -9,7 +9,7 @@
 var Transporter = {
 
 
-    run: function (creep, ClientAnzahl) {
+    run: function (creep, transporter,upgrader) {
 
         let time = Game.cpu.getUsed();
         let action = creep.memory.action;
@@ -30,10 +30,10 @@ var Transporter = {
                 let x = Math.abs(cx-sx);
                 let y = Math.abs(cy-sy);
 
-                let final = x+y;
-                if(x === 0||y === 0){
-                    final++;
-                }
+               let final = x+y;
+               if(x === 0||y === 0){
+                   final++;
+               }
 
                 return final;
             }
@@ -65,32 +65,15 @@ var Transporter = {
             }
         };
 
-        let CointainerFüllen = {
-            container: function () {
-                if (source === null) {
-                    source = creep.pos.findClosestByPath(FIND_STRUCTURES,{
-                        filter: function(object) {
-                            if(object.structureType === STRUCTURE_CONTAINER){
-                                if(object.store.getFreeCapacity()>creep.store.getCapacity()){
-                                    return object;
-                                }
-                            }
-                        }
-                    });
-                } else if (checkDistance.check()<=2) {
-                    creep.transfer(Game.getObjectById(source), RESOURCE_ENERGY);
-                }else{
-                    creep.moveTo(Game.getObjectById(source));
-                }
-
-
-            }
-        }
-
         let Upgrader = {
             upgrader: function () {
                 if (source === null) {
-                    source = Game.creeps[creep.memory.client].id;
+                    let t = Game.creeps[creep.memory.client];
+                    if(t === undefined){
+                        creep.memory.client = null;
+                    }else{
+                        source = Game.creeps[creep.memory.client].id;
+                    }
                 } else if (checkDistance.check()<=2) {
                     if (Game.getObjectById(source) === null) {
                         creep.memory.client = null;
@@ -142,15 +125,13 @@ var Transporter = {
             Upgrader.upgrader();
         } else if (creep.memory.client === null) {
             UpgraderFinden.Find();
-            if(creep.memory.client === null){
-
-            }
         }
         creep.memory.action = action;
         creep.memory.source = source;
 
 
         return (Game.cpu.getUsed() - time);
+
 
     }
 };

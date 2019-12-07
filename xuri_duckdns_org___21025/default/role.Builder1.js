@@ -8,7 +8,7 @@
  */
 var Builder = {
 
-    run: function (creep, repair) {
+    run: function (creep) {
 
         let time = Game.cpu.getUsed();
         let action = creep.memory.actionb;
