@@ -18,7 +18,7 @@ let renewCreep = require('action.renew');
 //LVL 1
 let lvl = {
     run:function (spawn) {
-        let MinerAnzahl = 7;
+        let MinerAnzahl = 4;
         let UpgraderAnzahl = 0;
         let Transporteranzahl = 10; //muss > Uprgader#
 
